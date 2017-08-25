@@ -1,39 +1,63 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thibaulthenry
- * Date: 05/04/2016
- * Time: 10:24
- */
 
-namespace Tiloweb\PaginationBundle\Twig\Extension;
+namespace TangoMan\PaginationBundle\Twig\Extension;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class PaginationExtension extends \Twig_Extension
 {
+    /**
+     * @var \Twig_Environment
+     */
     private $template;
 
+    /**
+     * PaginationExtension constructor.
+     *
+     * @param \Twig_Environment $template
+     */
     public function __construct(\Twig_Environment $template)
     {
         $this->template = $template;
     }
 
-    public function getFunctions() {
-        return array(
-            new \Twig_SimpleFunction('pagination', array($this, 'paginationFunction'), array(
-                'is_safe' => array('html')
-            ))
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'tangoman_pagination';
+    }
+
+    /**
+     * @return array
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction(
+                'pagination', [$this, 'paginationFunction'], ['is_safe' => ['html'],]
+            ),
+        ];
+    }
+
+    /**
+     * @param Paginator $paginator
+     * @param string    $template
+     *
+     * @return string
+     */
+    public function paginationFunction(Paginator $paginator, $template = 'default')
+    {
+        if ($template == 'default' || $template == 'smart' || $template == 'meta') {
+            $template = '@TangoManPagination/'.$template.'.html.twig';
+        }
+
+        return $this->template->render(
+            $template,
+            [
+                'pages' => ceil($paginator->count() / $paginator->getQuery()->getMaxResults()),
+            ]
         );
-    }
-
-    public function getName() {
-        return 'tiloweb_pagination';
-    }
-
-    public function paginationFunction(Paginator $paginator) {
-        return $this->template->render('TilowebPaginationBundle::pagination.html.twig', array(
-            'pages' => ceil($paginator->count() / $paginator->getQuery()->getMaxResults()),
-        ));
     }
 }

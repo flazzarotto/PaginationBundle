@@ -1,6 +1,6 @@
 services:
-    tiloweb_pagination.twig_extension:
-        class: Tiloweb\PaginationBundle\Twig\Extension\PaginationExtension
+    twig_extension.tangoman_pagination:
+        class: TangoMan\PaginationBundle\Twig\Extension\PaginationExtension
         public: false
         arguments: ["@twig"]
         tags:

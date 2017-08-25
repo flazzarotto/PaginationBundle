@@ -1,0 +1,11 @@
+{% if pages > 1 %}
+    {% set page =  app.request.query.int('page', 1) %}
+    {% if page > 1 %}
+        <link rel="prev"
+              href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': page - 1}))) }}"/>
+    {% endif %}
+    {% if page < pages %}
+    <link rel="next"
+          href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': page + 1}))) }}"/>
+    {% endif %}
+{% endif %}

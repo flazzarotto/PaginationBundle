@@ -1,7 +1,9 @@
 Usage
 =====
 
-This Bundle made easy to use the Doctrine\Paginator method to optimally paginate your requests. The pagination always use the `GET $page` to control on wich page you are, so you don't have to worry about the route.
+This Bundle made easy to use the Doctrine\Paginator method to optimally paginate your requests and make results optimized for SEO. 
+The pagination always use the `GET $page` to control on wich page you are, so you don't have to worry about the route. 
+Two different responsive templates are available, `default.thml.twig` and `smart.html.twig`.
 
 Installation
 ============
@@ -13,7 +15,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```bash
-$ composer require tiloweb/pagination-bundle "dev-master"
+$ composer require tangoman/pagination-bundle
 ```
 
 This command requires you to have Composer installed globally, as explained
@@ -33,18 +35,17 @@ in the `app/AppKernel.php` file of your project:
 // ...
 class AppKernel extends Kernel
 {
+    // ...
+
     public function registerBundles()
     {
         $bundles = array(
             // ...
-
-            new Tiloweb\PaginationBundle\TilowebPaginationBundle(),
+            new TangoMan\PaginationBundle\TangoManPaginationBundle(),
         );
 
         // ...
     }
-
-    // ...
 }
 ```
 
@@ -69,12 +70,12 @@ class User extends EntityRepository
             );
         }
 
-        if(!is_numeric($page)) {
+        if(!is_numeric($max)) {
             throw new \InvalidArgumentException(
                 '$max must be an integer ('.gettype($max).' : '.$max.')'
             );
         }
-        
+
         $dql = $this->createQueryBuilder('user');
         $dql->orderBy('user.lastname', 'DESC');
 
@@ -96,7 +97,7 @@ class User extends EntityRepository
 ```
 
 Step 4: Make the request in the controller
----------------------------------
+------------------------------------------
 
 ```php
 <?php
@@ -129,7 +130,7 @@ class DefaultController extends Controller
 ```
 
 Step 5: Integrate in Twig
----------------------------------
+-------------------------
 
 ```twig
 <table class="table">
@@ -163,8 +164,30 @@ Step 5: Integrate in Twig
 </table>
 ```
 
-Step 6: Enjoy
----------------------------------
+If you want to use "smart" pagination add following argument:
+
+```twig
+{{ pagination(listUser, 'smart') }}
+```
+
+You can use your own pagination template as well:
+```twig
+{{ pagination(listUser, '@AppBundle/pagination/custom.twig') }}
+```
+
+Step 6: Integrate rel="next" and rel="prev" markup 
+--------------------------------------------------
+
+Inside your views :
+
+```twig
+<head>
+    {{ pagination(listUser, 'meta') }}
+</head>
+```
+
+Step 7: Enjoy
+-------------
 
 ```html
 <table class="table">
@@ -218,12 +241,12 @@ Step 6: Enjoy
                             &lt;
                         </a>
                     </li>
-                    <li class="page-item">
+                    <li class="page-item hidden-xs">
                         <a href="/app_dev.php/user/?page=1" class="page-link">
                             1
                         </a>
                     </li>
-                    <li class="page-item">
+                    <li class="page-item hidden-xs">
                         <a href="/app_dev.php/user/?page=2" class="page-link">
                             2
                         </a>
@@ -233,7 +256,7 @@ Step 6: Enjoy
                             3
                         </a>
                     </li>
-                    <li class="page-item">
+                    <li class="page-item hidden-xs">
                         <a href="/app_dev.php/user/?page=4" class="page-link">
                             4
                         </a>

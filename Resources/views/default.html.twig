@@ -1,0 +1,48 @@
+{# Don't show pagination when only one page #}
+{% if pages > 1 %}
+    {% set page =  app.request.query.int('page', 1) %}
+    <ul class="pagination">
+
+        {# Show previous buttons #}
+        {% if page > 1 %}
+            <li class="page-item">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': 1}))) }}"
+                   class="page-link">
+                    <<
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': page - 1}))) }}"
+                   class="page-link">
+                    <
+                </a>
+            </li>
+        {% endif %}
+
+        {# Show button for pages between -4 and +4 except when < 1 or > nbPages #}
+        {% for item in range(max(page - 4, 1), min(page + 4, pages)) %}
+            <li {% if item == page %}class="page-item active" {% else %}class="page-item hidden-xs"{% endif %}>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': item}))) }}"
+                   class="page-link">
+                    {{ item }}
+                </a>
+            </li>
+        {% endfor %}
+
+        {# Show next buttons #}
+        {% if page < pages %}
+            <li class="page-item">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': page +1 }))) }}"
+                   class="page-link">
+                    >
+                </a>
+            </li>
+            <li class="page-item">
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': pages}))) }}"
+                   class="page-link">
+                    >>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
