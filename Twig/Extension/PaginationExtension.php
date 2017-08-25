@@ -49,7 +49,7 @@ class PaginationExtension extends \Twig_Extension
      */
     public function paginationFunction(Paginator $paginator, $template = 'default')
     {
-        if ($template == 'default' || $template == 'smart' || $template == 'meta') {
+        if ($template == 'default' || $template == 'smart' || $template == 'meta' || $template == 'select') {
             $template = '@TangoManPagination/'.$template.'.html.twig';
         }
 
