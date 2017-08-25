@@ -172,7 +172,7 @@ If you want to use "smart" pagination add following argument:
 
 You can use your own pagination template as well:
 ```twig
-{{ pagination(listUser, '@AppBundle/pagination/custom.twig') }}
+{{ pagination(listUser, '@AppBundle/pagination/custom.html.twig') }}
 ```
 
 Step 6: Integrate rel="next" and rel="prev" markup 
