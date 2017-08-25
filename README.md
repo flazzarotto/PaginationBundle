@@ -170,7 +170,14 @@ If you want to use "smart" pagination add following argument:
 {{ pagination(listUser, 'smart') }}
 ```
 
+You can select limit result per page with following code:
+
+```twig
+{{ pagination(listUser, 'select') }}
+```
+
 You can use your own pagination template as well:
+
 ```twig
 {{ pagination(listUser, '@AppBundle/pagination/custom.html.twig') }}
 ```
