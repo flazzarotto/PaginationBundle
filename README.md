@@ -62,7 +62,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class User extends EntityRepository
 {
-    public function findByPage($page = 1, $max = 10)
+    public function findByPage($page = 1, $limit = 10)
     {
         if(!is_numeric($page)) {
             throw new \InvalidArgumentException(
@@ -70,20 +70,20 @@ class User extends EntityRepository
             );
         }
 
-        if(!is_numeric($max)) {
+        if(!is_numeric($limit)) {
             throw new \InvalidArgumentException(
-                '$max must be an integer ('.gettype($max).' : '.$max.')'
+                '$limit must be an integer ('.gettype($limit).' : '.$limit.')'
             );
         }
 
         $dql = $this->createQueryBuilder('user');
         $dql->orderBy('user.lastname', 'DESC');
 
-        $firstResult = ($page - 1) * $max;
+        $firstResult = ($page - 1) * $limit;
 
         $query = $dql->getQuery();
         $query->setFirstResult($firstResult);
-        $query->setMaxResults($max);
+        $query->setMaxResults($limit);
 
         $paginator = new Paginator($query);
 
