@@ -1,7 +1,6 @@
 <form method="GET" class="col-xs-1 hidden-xs pagination">
     <select name="limit" id="selectLimit" class="form-control" onchange="this.form.submit()">
-        {% for i in 1..10 %}
-            {% set value = i * 10 %}
+        {% for value in [10, 20, 25, 50, 100] %}
             <option value="{{ value }}"{% if app.request.get('limit') == value %} selected{% endif %}>
                 {{ value }}
             </option>
