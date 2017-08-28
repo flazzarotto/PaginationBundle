@@ -7,4 +7,10 @@
             </option>
         {% endfor %}
     </select>
+    {# Appending query parameters when submitting form instead of replacing them, removing empty values #}
+    {% for index, value in app.request.query.all %}
+        {% if value != '' and index != 'limit' %}
+            <input type="hidden" name="{{ index }}" value="{{ value }}">
+        {% endif %}
+    {% endfor %}
 </form>
