@@ -1,7 +1,7 @@
 Usage
 =====
 
-This Bundle made easy to use the Doctrine\Paginator method to optimally paginate your requests and make results optimized for SEO. 
+This Bundle allows easy and optimal use of the Doctrine\Paginator method to paginate your requests and make results optimized for SEO. 
 The pagination always use the `GET $page` to control on wich page you are, so you don't have to worry about the route. 
 Two different responsive templates are available, `default.thml.twig` and `smart.html.twig`.
 
