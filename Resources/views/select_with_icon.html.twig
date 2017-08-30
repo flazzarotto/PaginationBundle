@@ -1,0 +1,20 @@
+<form method="GET" class="col-xs-1 hidden-xs pagination">
+    <div class="input-group">
+        <label for="selectLimit" class="input-group-addon">
+            <i class="glyphicon glyphicon-list"></i>
+        </label>
+        <select name="limit" id="selectLimit" class="form-control" onchange="this.form.submit()">
+            {% for value in [10, 20, 25, 50, 100] %}
+                <option value="{{ value }}"{% if app.request.get('limit') == value %} selected{% endif %}>
+                    {{ value }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    {# Appending query parameters when submitting form instead of replacing them, removing empty values #}
+    {% for index, value in app.request.query.all %}
+        {% if value != '' and index != 'limit' %}
+            <input type="hidden" name="{{ index }}" value="{{ value }}">
+        {% endif %}
+    {% endfor %}
+</form>
