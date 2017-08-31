@@ -34,7 +34,7 @@
         {# Show smart pagination buttons #}
         {% set start = (page / 10)|round %}
         {% set end = min((pages / 10)|round, start+3) %}
-        {% if start <= end %}
+        {% if start <= end and end <= pages / 10 %}
             {% for i in start..end %}
                 {% set item = i*10 %}
                 {% if item > page+4 %}
