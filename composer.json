@@ -1,7 +1,7 @@
 {
 	"name": "tangoman/pagination-bundle",
 	"description": "Symfony Pagination Twig Extension Bundle",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"type": "symfony-bundle",
 	"keywords": [
 		"Pager",
