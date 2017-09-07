@@ -165,28 +165,24 @@ Step 5: Integrate in Twig
 ```
 
 If you want to use "smart" pagination add following argument:
-
 ```twig
 {{ pagination(listUser, 'smart') }}
 ```
 
-You can select limit result per page with following code:
-
+You can display limit result per page selector with following code:
 ```twig
 {{ pagination(listUser, 'select') }}
 ```
 
 You can use your own pagination template as well:
-
 ```twig
 {{ pagination(listUser, '@AppBundle/pagination/custom.html.twig') }}
 ```
 
-Step 6: Integrate rel="next" and rel="prev" markup 
---------------------------------------------------
+Step 6: Integrate rel="canonical" rel="next" and rel="prev" markup 
+------------------------------------------------------------------
 
 Inside your views :
-
 ```twig
 <head>
     {{ pagination(listUser, 'meta') }}

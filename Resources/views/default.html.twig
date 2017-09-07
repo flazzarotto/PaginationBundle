@@ -2,15 +2,17 @@
 {% if pages > 1 %}
     {% set page =  app.request.query.int('page', 1) %}
     <ul class="pagination">
-
-        {# Show previous buttons #}
-        {% if page > 1 %}
+        {# Show goto first page button #}
+        {% if page > 2 %}
             <li class="page-item">
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': 1}))) }}"
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': null}))) }}"
                    class="page-link">
                     <<
                 </a>
             </li>
+        {% endif %}
+        {# Show previous page button #}
+        {% if page > 2 %}
             <li class="page-item">
                 <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': page - 1}))) }}"
                    class="page-link">
@@ -18,18 +20,25 @@
                 </a>
             </li>
         {% endif %}
-
-        {# Show button for pages between -4 and +4 except when < 1 or > nbPages #}
+        {# Show buttons for pages between -4 and +4 except when < 1 or > nbPages #}
         {% for item in range(max(page - 4, 1), min(page + 4, pages)) %}
-            <li {% if item == page %}class="page-item active" {% else %}class="page-item hidden-xs"{% endif %}>
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': item}))) }}"
-                   class="page-link">
-                    {{ item }}
-                </a>
-            </li>
+            {% if item == 1 %}
+                <li class="{% if item == page %}page-item active{% else %}page-item hidden-xs{% endif %}">
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': null}))) }}"
+                       class="page-link">
+                        {{ item }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="{% if item == page %}page-item active{% else %}page-item hidden-xs{% endif %}">
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': item}))) }}"
+                       class="page-link">
+                        {{ item }}
+                    </a>
+                </li>
+            {% endif %}
         {% endfor %}
-
-        {# Show next buttons #}
+        {# Show goto next page button #}
         {% if page < pages %}
             <li class="page-item">
                 <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': page +1 }))) }}"
@@ -37,6 +46,9 @@
                     >
                 </a>
             </li>
+        {% endif %}
+        {# Show goto last page button #}
+        {% if page < pages - 1 %}
             <li class="page-item">
                 <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'page': pages}))) }}"
                    class="page-link">
