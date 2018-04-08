@@ -214,10 +214,6 @@ Step 7: Enjoy
             <td>Matthias</td>
         </tr>
         <tr>
-            <td>HOUDAYER</td>
-            <td>Gaël</td>
-        </tr>
-        <tr>
             <td>MAHÉ</td>
             <td>Alexandre</td>
         </tr>
@@ -280,3 +276,17 @@ Step 7: Enjoy
     </tfoot>
 </table>
 ```
+
+Copyright (c) Thibault Henry
+
+[![License][license-GPL]][license-url]
+Distributed under the GPLv3.0 license.
+
+If you like **TangoMan Repository Helper** please star!
+And follow me on GitHub: [TangoMan75](https://github.com/TangoMan75)
+... And check my other cool projects.
+
+[Matthias Morin | LinkedIn](https://www.linkedin.com/in/morinmatthias)
+
+[license-GPL]: https://img.shields.io/badge/Licence-GPLv3.0-green.svg
+[license-url]: LICENSE
