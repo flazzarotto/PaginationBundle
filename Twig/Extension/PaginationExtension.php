@@ -6,6 +6,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class PaginationExtension extends \Twig_Extension
 {
+
     /**
      * @var \Twig_Environment
      */

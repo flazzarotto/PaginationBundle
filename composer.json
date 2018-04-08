@@ -1,7 +1,7 @@
 {
 	"name": "tangoman/pagination-bundle",
 	"description": "Symfony Pagination Twig Extension Bundle",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"type": "symfony-bundle",
 	"keywords": [
 		"Pager",
@@ -26,7 +26,7 @@
 		},
 		{
 			"name": "Matthias Morin",
-			"email": "tangoman@free.fr"
+			"email": "matthias.morin@gmail.com"
 		},
 		{
 			"name": "Fabrice Lazzarotto",
