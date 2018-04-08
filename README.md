@@ -283,6 +283,7 @@ Copyright (c) Thibault Henry
 Distributed under the GPLv3.0 license.
 
 If you like **TangoMan Pagination Bundle** please star!
+
 And follow me on GitHub: [TangoMan75](https://github.com/TangoMan75)
 ... And check my other cool projects.
 
